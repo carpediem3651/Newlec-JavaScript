@@ -6,13 +6,113 @@
     <title>Document</title>
     <script>
 
-        // JSON
+        // Infinity : Global Property
         {
-            var exam = {kor:10, eng:30, "math":90};
-            console.log(exam["math"]);
-            var nums = [1,2,3,4,5];
-            console.log(nums);
+            var x = Infinity;
+            console.log(Infinity-10000000);
+            console.log(Number.MAX_VALUE);
+            var y = Math.pow(100,1000000000);
+            console.log(y);
         }
+
+        // NaN: Global Property
+        // {
+        //     var x = 3 * 'a';
+        //     console.log(x);
+        //     console.log(x == NaN); // false
+        //     console.log(x === NaN); // false
+        //     console.log(isNaN(x)); //true
+        // }
+
+        //기본값 설정
+        // {
+        //     var kor = null ?? 10; // null로만 한정해서 기본값을 만들고 싶을 때
+        //     var kor = false ?? 10;
+        //     var kor = false || 10; // falsy를 기반으로 기본값을 만들고 싶을 때
+        //     console.log(kor);
+        // }
+
+        // 논리연산의 병합
+        // {
+            // var result = true || false && false;
+            // result = 'Cat' || 'Dog' && 'Dragon';
+            // console.log(result);
+        // }
+
+
+        // Truthy / falsy
+        // {
+            // var kor = 9;
+            // var eng = 10;
+            // var math = 10;
+            // var valid = kor && eng && math;
+
+            // if(valid)
+            //     console.log("모든 값이 입력되었습니다.");
+            // else
+            //     console.log("입력되지 않은 값이 존재합니다.");
+
+            // var age = window.prompt("나이를 입력하세요");
+            // age = age || 10; // age를 입력안하면, false -> false || true가 나온다. true(10) 반환.
+            // console.log(age);
+
+            // var result = null || 0 || undefined || '' || 'aa' || ' ' || 3 || 'hello';
+            // console.log(result);
+
+            // var o5 = 'Cat' || 'Dog';
+            // console.log(o5);
+        // }
+
+        // Operators
+        // {
+        //     var result = 32 > "4"; // true 문자열이 숫자로 변환된다.
+        //     console.log(result);
+
+        //     var result = "32">"4"; // 문자열은 맨 앞의 알파벳, 가나다 순으로 크기가 결정된다. 숫자를 문자열로 처리할 때는 제일 앞글자를 보고 판단.
+        //     console.log(result);
+
+        //     var result = 3.5-"A"; // NaN -> Not A Number
+        //     console.log(result);
+        // }
+
+        // // JSON parser
+        // {
+
+        //     var member = {id:1, username:"dragon", password:'111'};
+        //     var json = JSON.stringify(member);
+        //     console.log(json);
+
+        //     var str = "{\"id\":1, \"username\":\"newlec\", \"password\":\"111\"}}";
+        //     var member = JSON.parse(str);
+        //     console.log(member.username);
+
+        //     var str = '{"id":1, "username":"newlec", "password":"111"}';
+        //     var member = JSON.parse(str);
+        //     console.log(member.username);
+        // }
+
+        // // JSON eval()
+        // {
+        //     var str = '({"id":1, "username":"newlec", "password":"111"})';
+        //     var member = eval(str);
+        //     console.log(member.username);
+        //     var str = "[3,4,2,3]";
+        //     console.log(str[2]);
+        //     var list = eval(str);
+        //     console.log(list[2]);
+
+        //     var code = "var x=30;";
+        //     eval(code);
+        //     console.log(x);
+        // }
+
+        // JSON
+        // {
+        //     var exam = {kor:10, eng:30, "math":90};
+        //     console.log(exam["math"]);
+        //     var nums = [1,2,3,4,5];
+        //     console.log(nums);
+        // }
 
         // // object property manipulation
         // {
@@ -119,6 +219,6 @@
     </script>
 </head>
 <body>
-    HelloWorld!
+    <!-- HelloWorld! -->
 </body>
 </html>
