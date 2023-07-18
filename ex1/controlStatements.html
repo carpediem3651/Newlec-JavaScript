@@ -6,29 +6,29 @@
     <title>Document</title>
     <script>
         // 배열의 다른 표현법
-        {
-            var exam = {kor:10, eng:20, math:30};
+        // {
+        //     var exam = {kor:10, eng:20, math:30};
 
-            console.log("------------------------");
-            for(var att in exam)
-                console.log(att+":"+exam[att]);
-        }
+        //     console.log("------------------------");
+        //     for(var att in exam)
+        //         console.log(att+":"+exam[att]);
+        // }
 
         /* for, for in , for of */
-        // {
-        //     var names = [,"철수", "영희", "맹구",, "동천"];
-        //     for(var i=0; i<names.length; i++)
-        //         console.log(names[i]);
-        //     connsole.log("----------------------");
+        {
+            var names = [,"철수", "영희", "맹구",, "동천"];
+            for(var i=0; i<names.length; i++)
+                console.log(names[i]);
+            console.log("----------------------")
 
-        //     for(var i in names)
-        //         console.log(names[i]);
-        //     console.log("-----------------------");
+            for(var i in names)
+                console.log(names[i]);
+            console.log("-----------------------")
 
-        //     for(var name of names)
-        //         console.log(name);
-        //     connsole.log("-----------------------");
-        // }
+            for(var name of names)
+                console.log(name);
+            console.log("-----------------------")
+        }
     </script>
 </head>
 <body>

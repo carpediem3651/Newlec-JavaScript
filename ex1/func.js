@@ -87,3 +87,34 @@
     }
     f1();
 }
+
+// Closure 함수
+// {
+//     var fClosuer = null;
+//     var fClosuer2 = null;
+//     var f1 = function() {
+//         var a = 1;
+//         a++;
+//         console.log("f1:"+a);
+
+//         function f2() {
+//             a++;
+//             console.log("f2:"+a);
+//         }
+//         window.fClosuer = f2;
+
+//         function f3() {
+//             a--;
+//             console.log("f3:"+a);
+//         }
+//         window.fClosuer2 = f3;
+//     }
+    
+//     f1();
+//     f1();
+//     f1();
+//     fClosuer();
+//     fClosuer2();
+//     fClosuer();
+//     fClosuer2();
+// }
