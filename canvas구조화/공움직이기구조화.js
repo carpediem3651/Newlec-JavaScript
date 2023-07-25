@@ -1,6 +1,3 @@
-//=====================두개의 공 띄우기(구조화)=========================
-
-
 /** @type {CanvasRenderingContext2D} */
 var canvas = document.querySelector("#canvas");
 var ctx = canvas.getContext("2d");
@@ -33,7 +30,7 @@ canvas.onclick = function(e){
     {
         curBall.setActive(false); // 이전에 표시되었던 공의 빨간 테두리를 꺼버리기 위해 사용한다.
         
-        curBall = balls1;
+        curBall = ball1;
         curBall.setActive();
         return; // 코드블럭을 벗어난다.
     }
@@ -67,9 +64,9 @@ window.setInterval(function(){
     ball1.update(); // Q.왜 update()와 draw()를 몰아줬을까?
     ball2.update();
 
-    ctx.clearRect(0,0,900,700); // Q. 왜 이게 여기에 들어갈까?
+    ctx.clearRect(0,0,900,700); // 이전에 그려졌던 원을 지운다. 원을 지우지 않으면 잔상처럼 남는다.
     // 그림을 그린다.
-    ball1.draw(ctx);
+    ball1.draw(ctx); // 그림을 그린다.
     ball2.draw(ctx);
 
     // for(var i=0; i<balls.length; i++) {
