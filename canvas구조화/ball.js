@@ -61,12 +61,12 @@ Ball.prototype = {
             return;
         }
 
-        this.isActive = active;
+        this.isActive = active; // active = false -> false 문양이 안생김
     },
 
     isLocated : function(x,y) {
-        var result = this.x - 30 < x&&
-                    x < this.x + 30 &&
+        var result = this.x - 30 < x&& // 찍은 값이 원 안에 들어간다 = 반지름x,y보다 작다
+                    x < this.x + 30 && // 결과값이 true아니면 false다.
                     this.y - 30 < y &&
                     y < this.y + 30;
 
