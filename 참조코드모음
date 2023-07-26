@@ -1,0 +1,117 @@
+★★★★★★★★★★★★★★★★Javascript★★★★★★★★★★★★★★★★
+
+★★★★★★★★★★★★★★★★Prototype 생성자★★★★★★★★★★★★★★★★
+//--------------------------------- Prototype 생성자---------------------------------
+// 변하는 요소인 '데이터'
+    function Exam(kor, eng, math) {
+        this.kor = kor || 0;
+        this.eng = eng || 0;
+        this.math = math || 0;
+    }
+
+    // 변하지 않는 요소인 함수를 prototype으로 지정한다.
+    Exam.prototype = {
+        total:function(){
+            return this.kor+this.eng+this.math;
+        },
+        avg:function(){
+            return this.total()/3;
+        }
+    }
+
+★★★★★★★★★★★★★★★★프로토타입 객체얻기★★★★★★★★★★★★★★★★
+
+// =======================Prototype 생성자=========================
+
+    // 변하는 요소인 '데이터'
+    function Exam(kor, eng, math) {
+        this.kor = kor || 0;
+        this.eng = eng || 0;
+        this.math = math || 0;
+    }
+
+    // 변하지 않는 요소인 함수를 prototype으로 지정한다.
+    Exam.prototype = {
+        total:function(){
+            return this.kor+this.eng+this.math;
+        },
+        avg:function(){
+            return this.total()/3;
+        }
+    }
+
+    var exam5 = new Exam(2,2,2);
+    
+
+//  ======================== 프로토타입 얻기====================
+{
+    function NewlecExam(){
+
+    }
+
+    NewlecExam.prototype = exam5;
+    var newExam = new NewlecExam();
+
+    console.log(newExam.__proto__); 1번째 방법
+    console.log(Object.getPrototypeOf(newExam)); 2번째 방법
+    console.log(NewlecExam.prototype); 3번째 방
+   
+}
+
+
+
+
+
+
+
+
+
+★★★★★★★★★★★★★★★★Canva★★★★★★★★★★★★★★★★
+// =============== 칸바 기본설정 ====================
+/** @type {HTMLCanvasElement} */
+var canvas = document.querySelector("#canvas");
+var ctx = canvas.getContext("2d");
+
+// ================클릭에 따른 변화===================
+
+canvas.onclick= function(e){ // 클릭이라는 이벤트가 발생한다.
+    console.log(e.x, e.y); // 좌표를 찍는다.
+ 
+    var ball2 = new Path2D(); // 찍은 좌표에 따라 원이 그려진다.
+    ball2.arc(e.x,e.y,30,0,Math.PI*2); //원의 모양을 그린다.
+    ctx.fill(ball2); // 원안의 색을 채운다.
+}
+// ================기본 정석==================
+ctx.beginPath();
+ctx.arc(50,100,50,0,Math.PI*1.5,true); //시작 x좌표:50, y좌표:100, 반지름:50, 시작앵글:0, 끝 앵글:Math.PI*1.5(Math.PI = 180), 반시계방향 여부
+ctx.stroke();
+
+// // ================객체생성을 활용=============
+var shape1 = new Path2D();
+shape1.arc(50,100,50,0,Math.PI*1.5,true);
+ctx.stroke(shape1);
+
+// ================lineTo 사용==================
+var shape1 = new Path2D();
+ctx.strokeStyle = "red";
+shape1.arc(55,55,50,0,Math.PI*1.5);
+shape1.lineTo(105,5);
+shape1.lineTo(105,55);
+ctx.stroke(shape1);
+
+//=================Shift를 누르고 클릭하는 경우와 누르지 않고 클릭하는 경우 그림========================
+canvas.onclick = function(e){
+    var shape = new Path2D();
+    //case1. shift를 누른상태에서 클릭한다.
+    if(e.shiftKey)
+    {
+        shape.rect(e.x,e.y,50,50);
+        ctx.stroke(shape)
+    }
+    //case2. shift를 누르지 않은 상태에서 클릭한다.
+    else
+    {
+        shape.arc(e.x, e.y,25,0,Math.PI*2);
+        ctx.stroke(shape);
+    }
+}
