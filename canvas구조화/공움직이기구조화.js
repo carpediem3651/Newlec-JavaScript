@@ -11,8 +11,6 @@ var curBall = ball1; // 내가 찍은 공
 curBall.setActive(); // 내가 선택한 공을 활성화한다.
 
 
-
-
 // ------------------캔버스 클릭시 x,y값 설정------------------
 canvas.onclick = function(e){
 
@@ -41,13 +39,13 @@ window.setInterval(function(){
         }
 
         // d와 r구하기
-        var w = curBall.x - ball.x;
-        var h = curBall.y - ball.y;
-        var d = Math.sqrt(w*w+h*h); // 피타고라스 정리의 빗변으로 지름을 구한다.
-        var rSum = curBall.radius + ball.radius;
+        var w = curBall.x - ball.x; // 내가 움직이는 원과 멈춰있는 원이 있는 x좌표의 거리
+        var h = curBall.y - ball.y; // 내가 움직이는 원과 멈춰있는 원이 있는 y좌표의 거리 
+        var d = Math.sqrt(w*w+h*h); // 피타고라스 정리의 빗변으로 '지름'을 구한다.
+        var rSum = curBall.radius + ball.radius; //두 원 반지름의 합
 
         // 충돌이 발생한다면 공이 사라진다.
-        if(d <= rSum){
+        if(d <= rSum){ //왜 반지름의 합이 d보다 클 때도 이 조건이지?
             var idxBall = balls.indexOf(ball); // 충돌된 ball의 인덱스를 찾아
             balls.splice(idxBall,1); // 배열에서 삭제한다 = ball이 사라진다.
         }
@@ -63,15 +61,15 @@ window.setInterval(function(){
         ball.draw(ctx);
 
     // ============== 삼각형 버튼 만들기 ===============
-    //버튼 삼각형 모양 볼의 위치보다 위로올라가기위해 여기에 위치
-    // 삼각형의 중심 축과 반지름
+    // 버튼 삼각형 모양 볼의 위치보다 위로올라가기위해 여기에 위치
+    // 삼각형이 놓인 중심 축과 반지름
     var bx = 570;
     var by = 30;
-    var br = 20;
+    var br = 30;
 
     //피타고라스 정리를 통해 구한 빗변 hw
     var hw = Math.sqrt(br*br - br/2*br/2);
-    var pos1 = {x:bx, y:by-br};
+    var pos1 = {x:bx, y:by-br}; // y값은 반지름만큼 중심축에서 위로 올라가니깐 반지름을 뺀다
     var pos2 = {x:bx-hw, y:by+(br/2)};
     var pos3 = {x:bx+hw, y:by+(br/2)};
     
@@ -80,7 +78,7 @@ window.setInterval(function(){
     btnShape.lineTo(pos2.x, pos2.y);
     btnShape.lineTo(pos3.x, pos2.y);
 
-    // 왜 색깔을 바꾸고 다시 색깔을 되돌리지? -> 다음 그림 색깔에 영향을 안주기위해서!
+    // 왜 색깔을 바꾸고 다시 색깔을 되돌리지? -> 다음 그림(다른그림) 색깔에 영향을 안주기위해서!
     var originFillStyle = ctx.fillStyle;
     ctx.fillStyle = "orange";
     ctx.fill(btnShape);
