@@ -41,7 +41,7 @@ Ball.prototype = {
     draw : function(ctx){
         var shape = new Path2D();
         shape.arc(this.x,this.y,this.radius,0,Math.PI*2);
-        // 왜 색깔을 바꾸고 다시 색깔을 되돌리지? -> 다음 그림 색깔에 영향을 안주기위해서!
+        // 왜 색깔을 바꾸고 다시 색깔을 되돌리지? -> 다음 그림(다른그림) 색깔에 영향을 안주기위해서!
         // ctx.clearRect(0,0,900,700); 공이 그려질 때 마다 이전 공이사라지기 때문에 주석처리.
         var originColor = ctx.fillStyle;
         ctx.fillStyle = this.color;
