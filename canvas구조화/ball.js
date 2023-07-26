@@ -7,6 +7,8 @@ function Ball(x,y,color) {
     this.dy = 0;
     this.color = color || "black";
     this.isActive = false; // 내가 선택한 볼을 표기(테두리)하기 위한 활성화멤버변수
+    this.radius = 30;
+    this.speed = 3;
 }
 
 Ball.prototype = {
@@ -19,7 +21,7 @@ Ball.prototype = {
         var w = (this.dx-this.x);
         var h = (this.dy-this.y);
         var d = Math.sqrt(w*w+h*h);
-        this.vx = w/d;
+        this.vx = w/d; //vx와 vy는 뭘까?
         this.vy = h/d;
     },
     update : function(){
@@ -31,14 +33,14 @@ Ball.prototype = {
             this.vy=0;
         } // 멈추기, 자바스크립트 실수에 대한 성격때문에 범위로 멈추는 작업을 해준다
     
-        this.x+= this.vx; //누적해서 x값으로 이동
-        this.y+= this.vy; //누적해서 y값으로 이동
+        this.x+= this.vx*this.speed; //누적해서 x값으로 이동, 속도조절
+        this.y+= this.vy*this.speed; //누적해서 y값으로 이동, 속도조절
         console.log(this.x, this.y);
     },
 
     draw : function(ctx){
         var shape = new Path2D();
-        shape.arc(this.x,this.y,30,0,Math.PI*2);
+        shape.arc(this.x,this.y,this.radius,0,Math.PI*2);
         // 왜 색깔을 바꾸고 다시 색깔을 되돌리지? -> 다음 그림 색깔에 영향을 안주기위해서!
         // ctx.clearRect(0,0,900,700); 공이 그려질 때 마다 이전 공이사라지기 때문에 주석처리.
         var originColor = ctx.fillStyle;
@@ -65,11 +67,11 @@ Ball.prototype = {
     },
 
     isLocated : function(x,y) {
-        var result = this.x - 30 < x&& // 찍은 값이 원 안에 들어간다 = 반지름x,y보다 작다
-                    x < this.x + 30 && // 결과값이 true아니면 false다.
-                    this.y - 30 < y &&
-                    y < this.y + 30;
+        var result = this.x - this.radius < x&& // 찍은 값이 원 안에 들어간다 = 반지름x,y보다 작다
+                    x < this.x + this.radius && // 결과값이 true아니면 false다.
+                    this.y - this.radius < y &&
+                    y < this.y + this.radius;
 
         return result;
-    }
+    },
 };

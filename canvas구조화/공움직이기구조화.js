@@ -11,6 +11,8 @@ var curBall = ball1; // 내가 찍은 공
 curBall.setActive(); // 내가 선택한 공을 활성화한다.
 
 
+
+
 // ------------------캔버스 클릭시 x,y값 설정------------------
 canvas.onclick = function(e){
 
@@ -25,40 +27,31 @@ canvas.onclick = function(e){
         }
     }
 
-    // 선택한 원에 빨간 테두리 그리기
-    // if(ball1.isLocated(e.x, e.y))
-    // {
-    //     curBall.setActive(false); // 이전에 표시되었던 공의 빨간 테두리를 꺼버리기 위해 사용한다.
-        
-    //     curBall = ball1;
-    //     curBall.setActive();
-    //     return; // 코드블럭을 벗어난다.
-    // }
-
-    // if(ball2.isLocated(e.x,e.y))
-    // {
-    //     curBall.setActive(false);
-    //     curBall = ball2;
-    //     curBall.setActive();
-    //     return;
-    // }
-
     curBall.moveTo(e.x,e.y); // 원밖에 찍는경우 curBall을 이동시킨다.
 };
 
 // -----------------그림그리기----------------------
 window.setInterval(function(){
 
-    // 아래문장 중복처리
-    // for(var i=0; i<balls.length; i++) {
-    //     balls[0].update();
-    //     balls[1].update();
-    
-    //     ctx.clearRect(0,0,900,700); // 왜 이게 여기에 들어갈까?
-        
-    //     balls[0].draw(ctx);
-    //     balls[1].draw(ctx);
-    // }
+    // ================충돌(두 원 반지름의 합이 지름과 같으면 충돌한다는 아이디어를 이용한다.)==================
+    for (var ball of balls) { // 볼 전체를 순회한다.
+        // 만약 ball이 curBall과 같다면 다음 턴으로 이동
+        if(ball === curBall){ // 왜 '=='이 아니고 '==='이지? -> 객체가 같아야한다.
+            continue;
+        }
+
+        // d와 r구하기
+        var w = curBall.x - ball.x;
+        var h = curBall.y - ball.y;
+        var d = Math.sqrt(w*w+h*h); // 피타고라스 정리의 빗변으로 지름을 구한다.
+        var rSum = curBall.radius + ball.radius;
+
+        // 충돌이 발생한다면 공이 사라진다.
+        if(d <= rSum){
+            var idxBall = balls.indexOf(ball); // 충돌된 ball의 인덱스를 찾아
+            balls.splice(idxBall,1); // 배열에서 삭제한다 = ball이 사라진다.
+        }
+    }
 
     // 값을 변경한다.
     for(var ball of balls)
@@ -69,5 +62,27 @@ window.setInterval(function(){
     for(var ball of balls)
         ball.draw(ctx);
 
+    // ============== 삼각형 버튼 만들기 ===============
+    //버튼 삼각형 모양 볼의 위치보다 위로올라가기위해 여기에 위치
+    // 삼각형의 중심 축과 반지름
+    var bx = 570;
+    var by = 30;
+    var br = 20;
 
-}, 50);
+    //피타고라스 정리를 통해 구한 빗변 hw
+    var hw = Math.sqrt(br*br - br/2*br/2);
+    var pos1 = {x:bx, y:by-br};
+    var pos2 = {x:bx-hw, y:by+(br/2)};
+    var pos3 = {x:bx+hw, y:by+(br/2)};
+    
+    var btnShape = new Path2D();
+    btnShape.moveTo(pos1.x, pos1.y);
+    btnShape.lineTo(pos2.x, pos2.y);
+    btnShape.lineTo(pos3.x, pos2.y);
+
+    // 왜 색깔을 바꾸고 다시 색깔을 되돌리지? -> 다음 그림 색깔에 영향을 안주기위해서!
+    var originFillStyle = ctx.fillStyle;
+    ctx.fillStyle = "orange";
+    ctx.fill(btnShape);
+    ctx.fillStyle = originFillStyle;
+}, 17);
