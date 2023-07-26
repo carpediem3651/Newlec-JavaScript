@@ -18,7 +18,7 @@ canvas.onclick = function(e){
     for(var ball of balls) {
         if(ball.isLocated(e.x, e.y))
         {
-            curBall.setActive(false); // 왜 false로 했는지 생각해보자
+            curBall.setActive(false); // 왜 false로 했는지 생각해보자 ->테두리 문양을 없앤다
             curBall = ball;
             curBall.setActive();
             return;
