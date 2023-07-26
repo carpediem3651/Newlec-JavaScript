@@ -15,11 +15,11 @@ curBall.setActive(); // 내가 선택한 공을 활성화한다.
 canvas.onclick = function(e){
 
     // 배열로 문장 중복 줄이기
-    for(var i=0; i<balls.length; i++) {
-        if(balls[i].isLocated(e.x, e.y))
+    for(var ball of balls) {
+        if(ball.isLocated(e.x, e.y))
         {
             curBall.setActive(false); // 왜 false로 했는지 생각해보자
-            curBall = balls[i];
+            curBall = ball;
             curBall.setActive();
             return;
         }
@@ -61,17 +61,13 @@ window.setInterval(function(){
     // }
 
     // 값을 변경한다.
-    ball1.update(); // Q.왜 update()와 draw()를 몰아줬을까?
-    ball2.update();
+    for(var ball of balls)
+        ball.update();
 
     ctx.clearRect(0,0,900,700); // 이전에 그려졌던 원을 지운다. 원을 지우지 않으면 잔상처럼 남는다.
     // 그림을 그린다.
-    ball1.draw(ctx); // 그림을 그린다.
-    ball2.draw(ctx);
+    for(var ball of balls)
+        ball.draw(ctx);
 
-    // for(var i=0; i<balls.length; i++) {
-    //     balls[i].update();
-    //     balls[i].draw();
-    // }
 
 }, 50);
