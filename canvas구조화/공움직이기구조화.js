@@ -16,6 +16,14 @@ var upButton = new Button(570,30,30);
 // ------------------캔버스 클릭시 x,y값 설정------------------
 canvas.onclick = function(e){
 
+    // 삼각형 버튼하면 커진다. 공 보다 먼저 나와야 공과 겹쳐도 위에 나온다.
+    if(upButton.isLocated(e.x, e.y)){ // 삼각형 버튼안에 클릭을 한다.
+        
+        upButton.action(); // 삼각형이 증가한다.
+        return;
+        
+    };
+
     // 배열로 문장 중복 줄이기
     for(var ball of balls) {
         if(ball.isLocated(e.x, e.y))
@@ -26,6 +34,8 @@ canvas.onclick = function(e){
             return;
         }
     }
+
+
 
     curBall.moveTo(e.x,e.y); // 원밖에 찍는경우 curBall을 이동시킨다.
 };
@@ -57,12 +67,14 @@ window.setInterval(function(){
     for(var ball of balls)
         ball.update();
 
+    upButton.update();    
     ctx.clearRect(0,0,900,700); // 이전에 그려졌던 원을 지운다. 원을 지우지 않으면 잔상처럼 남는다.
     // 그림을 그린다.
     for(var ball of balls)
         ball.draw(ctx);
 
-    // 삼각형 버튼 구조화 
+    // 삼각형 버튼 구조화
+    // upButton.reset(); 
     upButton.draw(ctx);
 
     // ============== 삼각형 버튼 만들기 ===============

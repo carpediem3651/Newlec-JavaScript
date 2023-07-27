@@ -24,7 +24,7 @@ Ball.prototype = {
         this.vx = w/d; //vx와 vy는 뭘까?
         this.vy = h/d;
     },
-    update : function(){
+    update : function(){ // update의 의미가 뭔지 생각해보자. 내부에서 모양의 변화가 생기면 update를 쓴다.
         if(
             (this.x-1<this.dx&&this.dx<this.x+1)&&
             (this.y-1<this.dy&&this.dy<this.y+1)
