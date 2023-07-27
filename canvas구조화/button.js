@@ -28,7 +28,7 @@ Button.prototype = {
         return isIn;
     },
 
-    invalide: function(){ //사각형 좌표의 위치를 잡는다.
+    invalide: function(){ //반지름 d를 바탕으로 사각형 좌표의 위치를 잡는다. 그림을 그리기 전에 항상 이 작업을 해줘야한다.
         var d = this.radius;
         var hw = Math.sqrt(d*d-(d/2)*(d/2));
         var pos1 = {x:this.x, y:this.y-d};
