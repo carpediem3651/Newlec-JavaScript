@@ -115,3 +115,7 @@ canvas.onclick = function(e){
         ctx.stroke(shape);
     }
 }
+
+//====================도형안에 x,y축 좌표가 있는지 확인하는 메서드
+CanvasRenderingContext2D.isPointInPath(도형,x좌표,y좌표)
+ex) ctx.isPointInPath(this.shapePath, x, y);

@@ -11,12 +11,13 @@ balls.push(ball2);
 var curBall = ball1; // 내가 찍은 공
 curBall.setActive(); // 내가 선택한 공을 활성화한다.
 
-var upButton = new Button(570,30,30); 
+var upButton = new Button(570,30,30);
+var downButton = new Button(570,80,30); 
 
 // ------------------캔버스 클릭시 x,y값 설정------------------
 canvas.onclick = function(e){
 
-    // 삼각형 버튼하면 커진다. 공 보다 먼저 나와야 공과 겹쳐도 위에 나온다.
+    // 삼각형 버튼을 클릭하면 커진다. 공 보다 먼저 나와야 공과 겹쳐도 위에 나온다.
     if(upButton.isLocated(e.x, e.y)){ // 삼각형 버튼안에 클릭을 한다.
         
         upButton.action(); // 삼각형이 증가한다.
@@ -34,8 +35,6 @@ canvas.onclick = function(e){
             return;
         }
     }
-
-
 
     curBall.moveTo(e.x,e.y); // 원밖에 찍는경우 curBall을 이동시킨다.
 };
@@ -58,7 +57,7 @@ window.setInterval(function(){
 
         // 충돌이 발생한다면 공이 사라진다.
         if(d <= rSum){ //왜 반지름의 합이 d보다 클 때도 이 조건이지?
-            var idxBall = balls.indexOf(ball); // 충돌된 ball의 인덱스를 찾아
+            var idxBall = balls.indexOf(ball); // 충돌된 ball의 인덱스를 찾는다.
             balls.splice(idxBall,1); // 배열에서 삭제한다 = ball이 사라진다.
         }
     }
@@ -68,7 +67,8 @@ window.setInterval(function(){
         ball.update();
 
     upButton.update();    
-    ctx.clearRect(0,0,900,700); // 이전에 그려졌던 원을 지운다. 원을 지우지 않으면 잔상처럼 남는다.
+    downButton.update();
+    ctx.clearRect(0,0,900,700); // 이전에 그려졌던 원을 지운다. 원을 지우지 않으면 데이터가 업데이트 되지 않은 원이 남고 잔상처럼 남는다.
     // 그림을 그린다.
     for(var ball of balls)
         ball.draw(ctx);
@@ -76,6 +76,7 @@ window.setInterval(function(){
     // 삼각형 버튼 구조화
     // upButton.reset(); 
     upButton.draw(ctx);
+    downButton.draw(ctx);
 
     // ============== 삼각형 버튼 만들기 ===============
     // 버튼 삼각형 모양 볼의 위치보다 위로올라가기위해 여기에 위치
