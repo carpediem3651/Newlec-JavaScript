@@ -53,6 +53,12 @@ Button.prototype = {
 
     action : function() {
         this.radius =40;
+        //누른 버튼이 upbutton이면,
+        //ball.js의 speed가 증가한다.
+        
+
+        //누른 버튼이 downButton이면,
+        //ball.js의 speed가 감소한다.
         this.invalide();
     },
 }
