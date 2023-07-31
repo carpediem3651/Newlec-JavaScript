@@ -188,7 +188,7 @@
     // let nums = [4,34,23,12];
 
     // print1(nums);
-    // // print2(...nums);
+    // print2(...nums); // 결과값:4 34 23 12
 
     // console.log('-----------사용 예-----------');
     // let nums2 = [...nums,1,3,2]; // 배열안의 배열을 하나의 배열로 표시하기에 유용하다.
@@ -223,19 +223,18 @@
     // print(10,undefined, 10); // undefiend은 값이 들어있지 않은 통이라고 생각하자. 그러면 왜 10이 나오는지 알 수 있다.
     // print(1);
 
-    // // case 2.초기값 함수
+    // case 2.초기값 함수
     // function sum() {
     //     return 100;
     // }
 
     // function print(x,y=sum(),z) {
     //     console.log(x,y,z);
-    //     console.log(arguments.length); // 결과값 : 1 -> aruments는 기본값(y=10)을 받지 않는다.'
-        
+    //     console.log(arguments.length); // 결과값 : 3
     // }
 
     // print(10,null,10) // null은 원시 '값'이다 값이기 때문에 default value로 y=10이 작동하지 않는다.
-    // print(10,undefined, 10); // undefiend은 값이 들어있지 않은 통이라고 생각하자. 그러면 왜 10이 나오는지 알 수 있다.
+    // print(10,undefined, 10); // undefiend은 값이 들어있지 않은 통.
     // print(10,undefined);
     // print(1);
 
@@ -244,9 +243,9 @@
     //     return 100;
     // }
 
-    // function print(x,y=sum(),z=x=1) {
+    // function print(x,y=sum(),z=x+1) {
     //     console.log(x,y,z);
-    //     console.log(arguments.length); // 결과값 : 1 -> aruments는 기본값(y=10)을 받지 않는다.'
+    //     console.log(arguments.length); 
         
     // }
 
@@ -260,56 +259,57 @@
 {
     //---------------- Arrow Function의 기본사용--------------------
 
-    // let nums = [10,20,29,82,39,28,100];
-    // nums.sort(function(a,b){
-    //     return a-b;
-    // });
-    // console.log(nums);
+//     let nums = [10,20,29,82,39,28,100];
+//     nums.sort(function(a,b){
+//         return a-b;
+//     });
+//     console.log(nums);
 
-    // nums.sort((a,b)=>a-b);
-    // console.log(nums);
+//     nums.sort((a,b)=>a-b);
+//     console.log(nums);
 
-    //-------------------  차이점1: Arrow Function은 this를 가지지 않는다.--------------------
+//     //-------------------  차이점1: Arrow Function은 this를 가지지 않는다.--------------------
     // let x = 40;
 
     // setTimeout(function(){
     //     console.log(x);
     // },1000);
 
-    // // let game = {
-    // //     x:30,
-    // //     run(){
-    // //         setInterval(function(){
-    // //             this.x++; // this가 window 객체를 가지고 있기 때문(window객체에 x값 정의 안됨)에 NaN이 뜬다.
-    // //             console.log(this.x);
-    // //         }, 1000);
-    // //     }
-    // // };
-
     // let game = {
     //     x:30,
     //     run(){
-    //         setInterval(()=>{
-    //             this.x++; // Arrow Function은 this를 가지고 있지 않기 때문에 x값을 활용할 수 있다.
+    //         setInterval(function(){
+    //             this.x++; // this가 window 객체를 가지고 있기 때문(window객체에 x값 정의 안됨)에 NaN이 뜬다.
     //             console.log(this.x);
     //         }, 1000);
     //     }
     // };
 
+    // // let game = {
+    // //     x:30,
+    // //     run(){
+    // //         setInterval(()=>{
+    // //             this.x++; // Arrow Function은 this를 가지고 있지 않기 때문에 x값을 활용할 수 있다.
+    // //             console.log(this.x);
+    // //         }, 1000);
+    // //     }
+    // // };
+
     // game.run();
 
-    // --------------------------차이점2 : Arrow Function은 arguments가 없다. --------------------------
-    // let print() = function(){
+//     // --------------------------차이점2 : Arrow Function은 arguments가 없다. --------------------------
+    // let print = function(){
     //     console.log(arguments[0],arguments[1]) // 결과값 :2,3
     // }
     
-    // let print = () => {
+    // let print1 = () => {
     //     console.log(arguments[0], arguments[1]); // 결과값 : error
     // }
 
     // print(2,3);
+    // print1(2,3);
 
-    // --------------------------차이점 3 : Arrow Function은 생성자로 사용할 수 없다. this 관련 행위를 가지지 않는다. --------------------------
+//     // --------------------------차이점 3 : Arrow Function은 생성자로 사용할 수 없다. this 관련 행위를 가지지 않는다. --------------------------
     // let print = function(){
     //     console.log('normal function', this); 
     // };
@@ -325,41 +325,49 @@
     // new print1(2,3); // 결과: Uncaught TypeError: print1 is not a constructor
 }
 
-    // ----------------------- 차이점 4: call / bind / aplly를 사용할 수 없다. ----------------------- 
+//     // ----------------------- 차이점 4: call / bind / aplly를 사용할 수 없다. ----------------------- 
 {
 
-    //  ---------------- bind() -----------------
-    // let game = {
-    //     x:30 ,
-    //     run() {
-    //         console.log(this); // this는 game 객체를 가리킴 -> x:30이 출력됨
-    //         setTimeout(function(){
-    //             console.log(this); // this는 가리키는 객체가 없기 때문에 window객체를 나타냄
-    //             this.x++; // window객체에 x속성이 없으므로 NaN에러
-    //             console.log(this.x);
-    //         }.bind(this), 1000); // bind()를 써서 외부 함수의 속성(x)을 끌어오는 문제를 해결. this는 game객체.
-    //     }
-    // };
+//     //  ---------------- bind() -----------------
+//     let game = {
+//         x:30 ,
+//         run() {
+//             console.log(this); // this는 game 객체를 가리킴 -> x:30이 출력됨
+//             setTimeout(function(){
+//                 console.log(this); // this는 가리키는 객체가 없기 때문에 window객체를 나타냄
+//                 this.x++; // window객체에 x속성이 없으므로 NaN에러
+//                 console.log(this.x);
+//             }.bind(this), 1000); // bind()를 써서 외부 함수의 속성(x)을 끌어오는 문제를 해결. this는 game객체.
+//         }
+//     };
 
-    // // game.run();
+//     let f = function(a,b) {
+//         console.log(a,b);
+//         console.log(this);
+//         this.x++;
+//         console.log(this.x);
+//     };
+//     f();
+
+//     // game.run();
 
 
-    // // ----------------- call() & apply ---------------------
-    // let f = function(a,b) {
-    //     console.log(a,b);
-    //     console.log(this);
-    //     this.x++;
-    //     console.log(this.x);
-    // };
+//     // // ----------------- call() & apply ---------------------
+//     let f = function(a,b) {
+//         console.log(a,b);
+//         console.log(this);
+//         this.x++;
+//         console.log(this.x);
+//     };
 
-    // let game2 = {
-    //     x:10
-    // }
+//     let game2 = {
+//         x:10
+//     }
 
-    // f.call(game,100,200); // f함수를 호출할 때 call()을 써서 매개변수를 변화 시킬 수 있다. game.f(); / game2.f(); 불가능 결과값: 31
-    // f.call(game2);
-    // f.apply(game2,[100,200]);
-    // f();
+//     f.call(game,100,200); // f함수를 호출할 때 call()을 써서 매개변수를 변화 시킬 수 있다. game.f(); / game2.f(); 불가능 결과값: 31
+//     f.call(game2);
+//     f.apply(game2,[100,200]);
+//     f();
 }
 
 
