@@ -11,17 +11,17 @@ class Ball {
     #radius;
     #speed;
 
-    constructor(x=100,y=100,vx=0,vy=0,dx=0,dy=0,color="black",isActive=false,radius=30,speed=3) {
+    constructor(x=100,y=100, color="black") {
         this.#x = x;
         this.#y = y;
-        this.#vx = vx;
-        this.#vy = vy;
-        this.#dx = dx;
-        this.#dy = dy;
-        this.#color = color;
-        this.#isActive = isActive; // 내가 선택한 볼을 표기(테두리)하기 위한 활성화멤버변수
-        this.#radius = radius;
-        this.#speed = speed;
+        this.#vx = 0;
+        this.#vy = 0;
+        this.#dx = 0;
+        this.#dy = 0;
+        this.#color;
+        this.#isActive = false; // 내가 선택한 볼을 표기(테두리)하기 위한 활성화멤버변수
+        this.#radius = 30;
+        this.#speed = 3;
     }
 
     // =================== 함수=====================
@@ -83,7 +83,6 @@ class Ball {
                     x < this.#x + this.#radius && // 결과값이 true아니면 false다.
                     this.#y - this.#radius < y &&
                     y < this.#y + this.#radius;
-
         return result;
     }
 }
