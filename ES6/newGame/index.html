@@ -12,6 +12,7 @@
         }
         #canvas{
             border: 1px solid gray;
+            outline: none;
         }
         .d-none{
             display: none;
@@ -21,6 +22,9 @@
 <body>
     <!-- 도화지 -->
     <img class="d-none" src="image/boy.png">
-    <canvas id="canvas" width="600" height="300"></canvas>
+    <!-- <img class="d-none" id="girl" src="image/girl.png">
+    <img class="d-none" id="whiteboy" src="image/whiteBoy.png"> -->
+    <!-- 키보드 입력은 canvas를 활성화 시키지 못한다. 이 문제를 해결하기 위해 'tabIndex'를 활용한다. -->
+    <canvas id="canvas" tabindex="0" width="1000" height="1000"></canvas>
 </body>
 </html>
