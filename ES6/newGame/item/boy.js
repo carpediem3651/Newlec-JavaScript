@@ -41,16 +41,16 @@ export default class Boy {
             this.#img,
 
             // --------- 캐릭터 속성-----------
-            w*this.#imgDirectionIndex,
-            h*this.#imgWalkingIndex,
-            w, 
-            h,
+            w*this.#imgDirectionIndex, // 캐릭터 방향
+            h*this.#imgWalkingIndex, // 움직임 별 인덱스
+            w, // 캐릭터 넓이
+            h, // 캐릭터 높이
 
             // --------- 캐릭터 위치------------
-            this.#x-w/2, 
-            this.#y-h/2, 
-            w*2, 
-            h*2
+            this.#x-w/2, // 캔버스 위 x좌표 
+            this.#y-h/2, // 캔버스 위 y좌표
+            w*2, // 크기
+            h*2 // 높이
             ); //h*this.#imgWalkingIndex 캐릭터 소스문서에서 세로로 하나씩 그림을 바꾸기 위한 코드이다.
         // ctx.drawImage(this.#img, 144 , 0 , 48, 48, this.#x, this.#y, 48*2, 48*2)
         // ctx.arc(this.#x, this.#y, 3, 0, Math.PI*2); // 캐릭터 중심점 확인
