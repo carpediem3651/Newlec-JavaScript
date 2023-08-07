@@ -10,6 +10,7 @@ export default class Boy {
     #moveDown;
     #moveLeft;
     #moveRight;
+    #speed;
 
     constructor(x=0, y=0){
         this.#x = x;
@@ -23,6 +24,7 @@ export default class Boy {
         this.#moveDown = false;
         this.#moveLeft = false;
         this.#moveRight = false; 
+        this.#speed = 10;
     }
 
     // 캐릭터 위치 변화의 증감을 멈추는 코드
@@ -81,14 +83,30 @@ export default class Boy {
 
     // 캐릭터의 이동을 담당한다.
     update(){ 
+        let nextX = this.#x; // 끝점 x에 닿으면 멈추기 위한 변수. 캐릭터 움직임을 제한하기 위한 변수
+        let nextY = this.#y; // 끝점 y에 닿으면 멈추기 위한 변수. 캐릭터 움직임을 제한하기 위한 변수
+        
         if(!this.#isWalking) //iswalking이 false면 움직이지 않는다. else if 를 많이 쓰지 않는다.
             return;
 
         // 이동에 대한 코드
-        if(this.#moveUp) this.#y--;
-        if(this.#moveDown) this.#y++;
-        if(this.#moveLeft) this.#x--;
-        if(this.#moveRight) this.#x++;
+        // if(this.#moveUp) this.#y--;
+        // if(this.#moveDown) this.#y++;
+        // if(this.#moveLeft) this.#x--;
+        // if(this.#moveRight) this.#x++;
+        if(this.#moveUp) nextY -= this.#speed;
+        if(this.#moveDown) nextY += this.#speed;
+        if(this.#moveLeft) nextX -= this.#speed;
+        if(this.#moveRight) nextX += this.#speed;
+
+        if(nextX >= 0 && nextX <= 752) // 캔버스의 x 경계에 부딪히면 캐릭터의 위치(this.#x)를 경계점(nextX)로 고정시켜 못움직이게 한다.
+        {
+            this.#x = nextX; 
+        }    
+        if(nextY >= 0 && nextY <= 442) // 캐릭터의 위치(this.#y)를 경계점(nextY)로 고정시켜 못움직이게 한다.
+        {
+            this.#y = nextY; 
+        } 
 
         // 캐릭터 상태변화 속도 조절하기, 걷는 동작과 관련된 코드
         if(this.#isWalking && this.#walkingDelay == 0) { // walkingDelay 변수를 둠으로써 캐릭터 움직임 속도에 제한을 둔다.
