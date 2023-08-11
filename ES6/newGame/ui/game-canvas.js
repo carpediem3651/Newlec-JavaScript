@@ -3,67 +3,77 @@ import Boy from '../item/boy.js'
 import Background from '../item/background.js'
 
 export default class GameCanvas{
-    #obj;
-    #ctx;
-    #boy;
-    #background;
-
-    constructor() {
+    #obj
+    #ctx
+    #boy
+    #background
+    
+    constructor(){
         /** @type {HTMLCanvasElement} */
-        this.#obj = document.querySelector("#canvas");
-        this.#obj.focus(); // 프로그램이 load될 때 focus()로 인해 선택된다.
-        this.#ctx = canvas.getContext("2d");
-        this.#boy = new Boy(300, 200); //x, y
-        this.#background = new Background(800,500);
+        //var canvas = document.body.firstElementChild
+        this.#obj = document.querySelector("#canvas")
+        this.#obj.focus();
+        this.#ctx = canvas.getContext("2d")
+        this.#boy = new Boy(300,200) // x,
+        this.#boy.onOutOfBounds = function(e) { // 콜백함수
+            console.log("앗 전화가 왔네?", "경계선에 닿았네? 근데 어디?")
+            console.log(e.border);
+        }        
+        this.#background = new Background(450,350);
+        
+        this.#obj.onkeydown = function(e){
+            // console.log("key down", e.key, e.code);
+            // console.log(e.key == "ArrowRight")
 
-        this.#obj.onkeydown = function(e){ // 명령을 위한 윈도우 API. canvas에는 키보드 입력이 적용되지 않아. tabIndex가 필요하다. 프로그램을 실행하자마자 이를 적용하기 위해 obj(canvas)에 focus()해준다. 
-            console.log("key down", e.key, e.code)
-
-            // *******플랫폼과 연결성을 느슨하게 만드는 역할
+            // 플랫폼과의 연결성을 느슨하게 만드는 역할
             switch(e.key){
-                case "ArrowUp" :
-                    this.#boy.moveTo("up");
+                case "ArrowUp":
+                    this.#boy.moveTo("up")
                     break;
-                case "ArrowDown" :
-                    this.#boy.moveTo("down");
+                case "ArrowDown":
+                    this.#boy.moveTo("down")
                     break;
-                case "ArrowLeft" :
-                    this.#boy.moveTo("left");
+                case "ArrowLeft":
+                    this.#boy.moveTo("left")
                     break;
-                case "ArrowRight" :
-                    this.#boy.moveTo("right");
-                    break;  
+                case "ArrowRight":
+                    this.#boy.moveTo("right")
+                    break;
+
             }
-        }.bind(this)
+            //this.#boy.moveTo(100,100);
+        }.bind(this);
 
-        // 키보드의 키를 떼는 코드
-        this.#obj.onkeyup = function(e) {
-            console.log("key up", e.key);
+        this.#obj.onkeyup = function(e){
+            console.log("key up", e.key, e.code)            
 
-            // *******플랫폼과 연결성을 느슨하게 만드는 역할
+            // 플랫폼과의 연결성을 느슨하게 만드는 역할
             switch(e.key){
-                case "ArrowUp" :
-                    this.#boy.stopTo("up");
+                case "ArrowUp":
+                    this.#boy.stopTo("up")
                     break;
-                case "ArrowDown" :
-                    this.#boy.stopTo("down");
+                case "ArrowDown":
+                    this.#boy.stopTo("down")
                     break;
-                case "ArrowLeft" :
-                    this.#boy.stopTo("left");
+                case "ArrowLeft":
+                    this.#boy.stopTo("left")
                     break;
-                case "ArrowRight" :
-                    this.#boy.stopTo("right");
-                    break;  
+                case "ArrowRight":
+                    this.#boy.stopTo("right")
+                    break;
+
             }
-        }.bind(this)
+            //this.#boy.moveTo(100,100);
+        }.bind(this);
     }
 
-    run() {
-        setInterval(() => {
-            this.#boy.update(); // 캐릭터 움직임을 위한 메서드
-
-            // this.#ctx.clearRect(0,0,1000,1000); // 캔버스 그림의 잔상을 지운다.
+    run(){      
+        setInterval(()=>{
+            this.#background.update();
+            this.#boy.update();
             
+            //this.#ctx.clearRect(0,0,900,700)
+            //this.#background.draw(this.#ctx);
             this.#background.draw(this.#ctx);
             this.#boy.draw(this.#ctx);
         },17)

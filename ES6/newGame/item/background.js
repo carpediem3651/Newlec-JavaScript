@@ -1,16 +1,29 @@
 export default class Background {
-    #x;
-    #y;
-    #img;
+    #x
+    #y
+    #width
+    #height
+    #img
 
-    constructor(x=0, y=0){
-        this.#x = x;
-        this.#y = y;
-        this.#img = document.querySelector(".d-none2");
+    constructor(x, y){
+        this.#img = document.querySelector(".map1");
+        this.#width = this.#img.width;
+        this.#height = this.#img.height;
+        this.#x = x;// - this.#width/2;
+        this.#y = y;// - this.#height/2;
     }
-    
+
+    update(){
+
+    }
+
     /** @param {CanvasRenderingContext2D} ctx */
-    draw(ctx) {
-        ctx.drawImage(this.#img,0,0); 
+    draw(ctx){
+        let offX = this.#width / 2;
+        let offY = this.#height / 2;
+
+        //let offPos = {x:this.#width / 2, y:this.#height / 2};
+
+        ctx.drawImage(this.#img, this.#x-offX, this.#y-offY);
     }
 }
